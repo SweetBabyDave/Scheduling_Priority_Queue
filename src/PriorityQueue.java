@@ -35,16 +35,23 @@ public class PriorityQueue<E extends Comparable<E>> {
         }
         if (getNpl(small.left) < getNpl(small.right))
             swapKids(small);
-        setNullPathLength(small);
+        setNullPathLength(small, -1);
         return small;
     }
 
-    private void setNullPathLength(Node<E> small) {
-
+    private void setNullPathLength(Node<E> small, int counter) {
+        if (small.right == null || small.left == null) {
+            small.npl = -1;
+            return;
+        }
+        setNullPathLength(small.right, counter++);
+        setNullPathLength(small.left, counter++);
     }
 
     private void swapKids(Node<E> small) {
-
+        Node<E> holder = small;
+        small.right = small.left;
+        small.left = holder.right;
     }
 
     private int getNpl(Node<E> t) {
