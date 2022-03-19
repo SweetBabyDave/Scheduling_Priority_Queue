@@ -6,7 +6,7 @@ public class PriorityQueue<E extends Comparable<E>> {
         if (head == null) {
             head = node;
         } else {
-            merge(head, node);
+            head = merge(head, node);
         }
     }
 
@@ -35,23 +35,23 @@ public class PriorityQueue<E extends Comparable<E>> {
         }
         if (getNpl(small.left) < getNpl(small.right))
             swapKids(small);
-        setNullPathLength(small, -1);
+        setNullPathLength(small);
         return small;
     }
 
-    private void setNullPathLength(Node<E> small, int counter) {
+    // Could be a problem with the += 1
+    private void setNullPathLength(Node<E> small) {
         if (small.right == null || small.left == null) {
-            small.npl = -1;
-            return;
+            small.npl = 0;
+        } else {
+            small.npl += 1;
         }
-        setNullPathLength(small.right, counter++);
-        setNullPathLength(small.left, counter++);
     }
 
     private void swapKids(Node<E> small) {
-        Node<E> holder = small;
-        small.right = small.left;
-        small.left = holder.right;
+        Node<E> holder = small.left;
+        small.left = small.right;
+        small.right = holder;
     }
 
     private int getNpl(Node<E> t) {
@@ -76,6 +76,7 @@ public class PriorityQueue<E extends Comparable<E>> {
             npl = 0;
         }
 
+        // This compareTo method might be wrong
         @Override
         public int compareTo(Node<E> o) {
             return value.compareTo(o.value);
