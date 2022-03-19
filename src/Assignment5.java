@@ -7,11 +7,11 @@ import java.util.Scanner;
 public class Assignment5 {
     public static void main(String[] args) {
 //        simpleQueueTest();
-//        scheduleTasks("taskset1.txt");
-//        scheduleTasks("taskset2.txt");
+        scheduleTasks("taskset1.txt");
+        scheduleTasks("taskset2.txt");
         scheduleTasks("taskset3.txt");
-//        scheduleTasks("taskset4.txt");
-//        scheduleTasks("taskset5.txt");
+        scheduleTasks("taskset4.txt");
+        scheduleTasks("taskset5.txt");
     }
 
     public static void scheduleTasks(String taskFile) {
@@ -27,17 +27,23 @@ public class Assignment5 {
     }
 
     public static void simpleQueueTest() {
-//        PriorityQueue<Integer> queue = new PriorityQueue<>();
-//        queue.enqueue(9);
-//        queue.enqueue(7);
-//        queue.enqueue(5);
-//        queue.enqueue(3);
-//        queue.enqueue(1);
-//        queue.enqueue(10);
-//
-//        while (!queue.isEmpty()) {
-//            System.out.println(queue.dequeue());
-//        }
+        PriorityQueue<Integer> queue = new PriorityQueue<>();
+        queue.enqueue(9);
+        queue.enqueue(7);
+        queue.enqueue(5);
+        queue.enqueue(3);
+        queue.enqueue(1);
+        queue.enqueue(10);
+        queue.enqueue(11);
+        queue.enqueue(12);
+        queue.enqueue(13);
+        queue.enqueue(14);
+        queue.enqueue(15);
+
+
+        while (!queue.isEmpty()) {
+            System.out.println(queue.dequeue());
+        }
     }
 
     /**

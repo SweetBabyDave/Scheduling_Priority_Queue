@@ -1,5 +1,3 @@
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 
 public class PriorityQueue<E extends Comparable<E>> {
     private Node<E> head;
@@ -42,12 +40,11 @@ public class PriorityQueue<E extends Comparable<E>> {
         return small;
     }
 
-    // Could be a problem with the += 1
     private void setNullPathLength(Node<E> small) {
         if (small.right == null || small.left == null) {
             small.npl = 0;
         } else {
-            small.npl += 1;
+            small.npl = small.right.npl + 1;
         }
     }
 
@@ -92,7 +89,6 @@ public class PriorityQueue<E extends Comparable<E>> {
             npl = 0;
         }
 
-        // This compareTo method might be wrong
         @Override
         public int compareTo(Node<E> o) {
             return value.compareTo(o.value);
