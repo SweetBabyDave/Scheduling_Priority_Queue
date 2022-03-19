@@ -9,8 +9,8 @@ public class Assignment5 {
 //        simpleQueueTest();
 //        scheduleTasks("taskset1.txt");
 //        scheduleTasks("taskset2.txt");
-//        scheduleTasks("taskset3.txt");
-        scheduleTasks("taskset4.txt");
+        scheduleTasks("taskset3.txt");
+//        scheduleTasks("taskset4.txt");
 //        scheduleTasks("taskset5.txt");
     }
 
@@ -85,28 +85,32 @@ public class Assignment5 {
             }
         }
 
-        while (!queue.isEmpty()) {
-            Task currTask = queue.dequeue();
-            currTask.duration -= 1;
-            System.out.printf("Time %d: %s ", clock, currTask);
+        while (!queue.isEmpty() || !tasks.isEmpty()) {
+            if (!queue.isEmpty()) {
+                Task currTask = queue.dequeue();
+                currTask.duration -= 1;
+                System.out.printf("Time %d: %s ", clock, currTask);
 
-            if (currTask.duration != 0) {
-                System.out.println();
-                queue.enqueue(currTask);
-            } else {
-                tasks.remove(currTask);
-                System.out.print("** ");
-
-                if (currTask.deadline < clock) {
-                    lateTime = clock - currTask.deadline;
-                    tasksLate += 1;
-                    System.out.printf("Late %d\n", (clock - currTask.deadline));
-                } else {
+                if (currTask.duration != 0) {
                     System.out.println();
+                    queue.enqueue(currTask);
+                } else {
+                    tasks.remove(currTask);
+                    System.out.print("** ");
+
+                    if (currTask.deadline < clock) {
+                        lateTime += clock - currTask.deadline;
+                        tasksLate += 1;
+                        System.out.printf("Late %d\n", (clock - currTask.deadline));
+                    } else {
+                        System.out.println();
+                    }
                 }
+            } else {
+                System.out.printf("Time %d: --- \n", clock);
             }
 
-            clock++;
+            clock += 1;
             for (Task task : tasks) {
                 if (task.start == clock) {
                     queue.enqueue(task);

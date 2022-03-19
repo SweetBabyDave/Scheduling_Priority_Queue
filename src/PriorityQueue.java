@@ -1,3 +1,6 @@
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class PriorityQueue<E extends Comparable<E>> {
     private Node<E> head;
 
@@ -57,6 +60,19 @@ public class PriorityQueue<E extends Comparable<E>> {
     private int getNpl(Node<E> t) {
         if (t == null) return -1;
         return t.npl;
+    }
+
+    public Node<E> getHead() {
+        return head;
+    }
+
+    public void printTree(Node<Task> node, StringBuilder sb, int counter) {
+        if (node == null) return;
+        counter++;
+        printTree(node.right, sb, counter);
+        String tab = new String(new char[counter]).replace("\0", "  ");
+        sb.append(tab).append(node.value).append("\n");
+        printTree(node.left, sb, counter);
     }
 
     private static class Node<E extends Comparable<E>> implements Comparable<Node<E>> {
